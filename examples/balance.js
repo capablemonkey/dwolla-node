@@ -1,7 +1,15 @@
-var dwolla = require('../lib/dwolla');
-var c = require('../config');
+var Dwolla = require('dwolla')      // Include the Dwolla REST Client
+    , cfg = require('./_config')    // Include any required keys
+    , $ = require('seq')
+    ;
 
-dwolla.balance(c.token, function(err, data) {
-  if (err) { console.log(err); }
-  console.log(data);
-});
+$()
+    .seq(function() {
+        Dwolla.balance(cfg.token, this)
+    })
+    .seq(function(balance) {
+        console.log('Your account balance is $' + balance);
+    })
+    .catch(function(error) {
+        console.log('Oops: ' + error);
+    })

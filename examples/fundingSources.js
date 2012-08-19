@@ -5,17 +5,17 @@ var Dwolla = require('dwolla')      // Include the Dwolla REST Client
 
 /**
  * EXAMPLE 1: 
- *   Fetch last 10 contacts from the 
+ *   Fetch all funding sources for the
  *   account associated with the provided
  *   OAuth token
  **/
 $()
     .seq(function() {
-        Dwolla.contacts(cfg.token, this)
+        Dwolla.fundingSources(cfg.token, this)
     })
-    .seq(function(contacts) {
-        console.log('Contacts found:');
-        console.log(contacts);
+    .seq(function(sources) {
+        console.log('Funding sources:');
+        console.log(sources);
     })
     .catch(function(error) {
         console.log('Oops: ' + error);
@@ -24,17 +24,17 @@ $()
     
 /**
  * EXAMPLE 2: 
- *   Search through the contacts of the
- *   account associated with the provided
- *   OAuth token
+ *   Fetch detailed information for the
+ *   funding source with a specific ID
  **/
 $()
     .seq(function() {
-        Dwolla.contacts(cfg.token, {search: 'Ben'}, this)
+        var fundingSourceId = 'pJRq4tK38fiAeQ8xo2iH9Q==';
+        Dwolla.fundingSourceById(cfg.token, fundingSourceId, this);
     })
-    .seq(function(contacts) {
-        console.log('Contacts found:');
-        console.log(contacts);
+    .seq(function(source) {
+        console.log('Funding source:');
+        console.log(source);
     })
     .catch(function(error) {
         console.log('Oops: ' + error);
