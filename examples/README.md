@@ -1,4 +1,4 @@
-# node-dwolla: NodeJS Dwolla API Examples
+# dwolla-node: NodeJS Dwolla API Examples
 
 ## Installation
 
