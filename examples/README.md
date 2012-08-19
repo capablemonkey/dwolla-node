@@ -8,16 +8,14 @@ Before you begin, you'll need to do a couple things:
     
     npm install
 
-2. Drop some API credentials in _config.js. You can generate your credenitals on (dwolla.com/applications)[https://www.dwolla.com/applications]
+2. Drop some API credentials in _config.js. You can generate your credenitals on dwolla.com/applications
 
-```javascript    
-module.exports = {
-    apiKey: '',
-    apiSecret: '',
-    token: '',
-    pin: ''
-}
-```
+    module.exports = {
+        apiKey: '',
+        apiSecret: '',
+        token: '',
+        pin: ''
+    }
     
 ## Usage
 
