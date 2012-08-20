@@ -1,11 +1,12 @@
 {
   "author": "Kenan Shifflett <kenan.shifflett@gmail.com>",
+  "contributors": ["Michael Schonfeld <michael@dwolla.com>"],
   "name": "dwolla",
   "description": "Dwolla API for node.js",
-  "version": "0.0.8",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "git@github.com:nanek/node-dwolla.git"
+    "url": "git@github.com:Dwolla/dwolla-node.git"
   },
   "main": "lib/dwolla.js",
   "engines": {
