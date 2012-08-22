@@ -16,7 +16,18 @@ Automatic installtion:
 ## Usage
 
 ```javascript
-    var Dwolla = require('dwolla')('[CLIENT_ID]', '[CLIENT_SECRET]');
+// Instantiate a Dwolla API object
+var Dwolla = require('dwolla')(['{CLIENT_ID}', '{CLIENT_SECRET}']);
+
+// Seed the user's OAuth token
+Dwolla.setToken('[TOKEN]');
+
+// Send money to a given Dwolla ID
+Dwolla.send('[PIN]', '812-626-8794', 1.00, function(error, transactionId) {
+    if(error) { console.log('Error: ' + error); }
+
+    console.log('Transaction ID: ' + transactionId);
+});
 ```
     
 ## Examples
