@@ -15,8 +15,9 @@ Automatic installtion:
 
 ## Usage
 
+```javascript
     var Dwolla = require('dwolla')('[CLIENT_ID]', '[CLIENT_SECRET]');
-
+```
     
 ## Examples
 
