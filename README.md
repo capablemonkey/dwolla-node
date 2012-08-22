@@ -5,11 +5,14 @@
 1.0.0
 
 ## Requirements
+
 - [NodeJS](http://www.nodejs.org/)
+- [npm](http://www.npmjs.org/)
+- [Dwolla Application](https://www.dwolla.com/applications)
 
 ## Installation
 
-Automatic installtion:
+Automatic installation:
 
     npm install dwolla
 
