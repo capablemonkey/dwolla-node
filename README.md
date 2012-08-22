@@ -15,6 +15,8 @@ Automatic installtion:
 
 ## Usage
 
+    var Dwolla = require('dwolla')('[CLIENT_ID]', '[CLIENT_SECRET]');
+
     
 ## Examples
 
@@ -29,7 +31,48 @@ This repo includes various usage examples, including:
 
 ## Methods
 
+Helper Methods:
 
+    setToken(oauth_token)   ==> (bool) did the token change sucessfully?
+    getToken()              ==> (string) the currently used oauth token
+
+Authentication Methods:
+
+    authUrl([redirect_uri, scope])          ==> (string) OAuth permissions page URL
+    requestToken(code[, redirect_uri, fn])  ==> (string) a never-expiring OAuth access token
+
+Account Methods:
+
+    basicAccountInfo(id, fn)    ==> 
+    fullAccountInfo(fn)         ==> (array) the user entity associated with the token
+    balance(fn)                 ==> (string) the Dwolla balance of the account associated with the token
+    register(userInfo, fn)      ==> 
+
+Contacts Methods:
+
+    contacts(params, fn)            ==> (array) list of contacts matching the search criteria
+    nearby(lat, lon, params, fn)    ==> (array) list of nearby spots matching the search criteria
+    
+Funding Sources Methods:
+
+    fundingSources(fn)          ==> (array) a list of funding sources associated with the token
+    fundingSourceById(id, fn)   ==> (array) information about the {$id} funding source
+
+Transactions Methods:
+
+    send(pin, destinationId, amount, params, fn)    ==> (string) transaction ID
+    request(pin, sourceId, amount, params, fn)      ==> (string) request ID
+    transactionById(id, fn)                         ==> (array) transaction details
+    transactions(params, fn)                        ==> (array) a list of recent transactions matching the search criteria
+    transactionsStats(params, fn)                   ==> (array) statistics about the account associated with the token
+    
+Offsite Gateway Methods:
+
+    startGatewaySession(redirectUri)                            ==> (bool) did session start?
+    addGatewayProduct(name, amount[, description, quantity])    ==> (bool) was product added?
+    verifyGatewaySignature(signature, checkout_id, amount)      ==> (bool) is signature valid?
+    getGatewayURL(destination_id[, params], fn)                 ==> (string) checkout URL
+    setMode(mode)                                               ==> (bool) did the mode change successfully?
 
 ## Credits
 

@@ -8,7 +8,6 @@
     "type": "git",
     "url": "git@github.com:Dwolla/dwolla-node.git"
   },
-  "main": "lib/dwolla.js",
   "engines": {
     "node": ">=0.4.7 <0.9.0"
   },
