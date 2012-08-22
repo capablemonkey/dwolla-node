@@ -30,7 +30,7 @@ Dwolla.send('[PIN]', '812-626-8794', 1.00, function(error, transactionId) {
 });
 ```
     
-## Examples
+## Examples / Quickstart
 
 This repo includes various usage examples, including:
 

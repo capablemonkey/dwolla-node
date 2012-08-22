@@ -1,5 +1,5 @@
-var Dwolla = require('dwolla')      // Include the Dwolla REST Client
-    , cfg = require('./_config')    // Include any required keys
+var Dwolla = require('dwolla')(cfg.apiKey, cfg.apiSecret)   // Include the Dwolla REST Client
+    , cfg = require('./_config')                            // Include any required keys
     , $ = require('seq')
     , express = require('express')
     , app = express()
@@ -17,7 +17,7 @@ var redirect_uri = 'http://localhost:3000/redirect'
  **/
 app.get('/example1', function(req, res) {
     // Clears out any previous products
-    Dwolla.startGatewaySession(cfg.apiKey, cfg.apiSecret, redirect_uri);
+    Dwolla.startGatewaySession(redirect_uri);
 
     // Add first product; Price = $10, Qty = 1
     Dwolla.addGatewayProduct('Test 1', 10)
@@ -49,7 +49,7 @@ app.get('/example2', function(req, res) {
     Dwolla.setMode('TEST')
     
     // Clears out any previous products
-    Dwolla.startGatewaySession(cfg.apiKey, cfg.apiSecret, redirect_uri);
+    Dwolla.startGatewaySession(redirect_uri);
     
     // Add first product; Price = $10, Qty = 1
     Dwolla.addGatewayProduct('Test 1', 10, 'Test product')
@@ -102,7 +102,7 @@ app.get('/redirect', function(req, res) {
     amount = req.query['amount'];
 
     // Clears out any previous products
-    Dwolla.startGatewaySession(cfg.apiKey, cfg.apiSecret);
+    Dwolla.startGatewaySession();
 
     // Verify the proposed signature
     did_verify = Dwolla.verifyGatewaySignature(signature, checkout_id, amount)

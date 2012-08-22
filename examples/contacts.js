@@ -1,7 +1,10 @@
-var Dwolla = require('dwolla')      // Include the Dwolla REST Client
+var Dwolla = require('dwolla')()    // Include the Dwolla REST Client
     , cfg = require('./_config')    // Include any required keys
     , $ = require('seq')
     ;
+
+// Seed the user's OAuth token
+Dwolla.setToken(cfg.token);
 
 /**
  * EXAMPLE 1: 
@@ -11,7 +14,7 @@ var Dwolla = require('dwolla')      // Include the Dwolla REST Client
  **/
 $()
     .seq(function() {
-        Dwolla.contacts(cfg.token, this)
+        Dwolla.contacts(this)
     })
     .seq(function(contacts) {
         console.log('Contacts found:');
@@ -30,7 +33,7 @@ $()
  **/
 $()
     .seq(function() {
-        Dwolla.contacts(cfg.token, {search: 'Ben'}, this)
+        Dwolla.contacts({search: 'Ben'}, this)
     })
     .seq(function(contacts) {
         console.log('Contacts found:');

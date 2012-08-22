@@ -1,7 +1,10 @@
-var Dwolla = require('dwolla')      // Include the Dwolla REST Client
+var Dwolla = require('dwolla')()    // Include the Dwolla REST Client
     , cfg = require('./_config')    // Include any required keys
     , $ = require('seq')
     ;
+
+// Seed the user's OAuth token
+Dwolla.setToken(cfg.token);
 
 /**
  * EXAMPLE 1: 
@@ -11,7 +14,7 @@ var Dwolla = require('dwolla')      // Include the Dwolla REST Client
  **/
 $()
     .seq(function() {
-        Dwolla.fundingSources(cfg.token, this)
+        Dwolla.fundingSources(this)
     })
     .seq(function(sources) {
         console.log('Funding sources:');
@@ -30,7 +33,7 @@ $()
 $()
     .seq(function() {
         var fundingSourceId = 'pJRq4tK38fiAeQ8xo2iH9Q==';
-        Dwolla.fundingSourceById(cfg.token, fundingSourceId, this);
+        Dwolla.fundingSourceById(fundingSourceId, this);
     })
     .seq(function(source) {
         console.log('Funding source:');

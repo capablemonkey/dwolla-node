@@ -1,11 +1,14 @@
-var Dwolla = require('dwolla')      // Include the Dwolla REST Client
+var Dwolla = require('dwolla')()    // Include the Dwolla REST Client
     , cfg = require('./_config')    // Include any required keys
     , $ = require('seq')
     ;
 
+// Seed the user's OAuth token
+Dwolla.setToken(cfg.token);
+
 $()
     .seq(function() {
-        Dwolla.balance(cfg.token, this)
+        Dwolla.balance(this)
     })
     .seq(function(balance) {
         console.log('Your account balance is $' + balance);

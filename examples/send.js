@@ -1,7 +1,10 @@
-var Dwolla = require('dwolla')      // Include the Dwolla REST Client
+var Dwolla = require('dwolla')()    // Include the Dwolla REST Client
     , cfg = require('./_config')    // Include any required keys
     , $ = require('seq')
     ;
+
+// Seed the user's OAuth token
+Dwolla.setToken(cfg.token);
 
 /**
  * EXAMPLE 1: 
@@ -9,7 +12,7 @@ var Dwolla = require('dwolla')      // Include the Dwolla REST Client
  **/
 $()
     .seq(function() {
-        Dwolla.send(cfg.token, cfg.pin, '812-626-8794', 1.00, this)
+        Dwolla.send(cfg.pin, '812-626-8794', 1.00, this)
     })
     .seq(function(transaction) {
         console.log('Money sent successfully. Transaction ID: ' + transaction);
@@ -25,7 +28,7 @@ $()
  **/
 $()
     .seq(function() {
-        Dwolla.send(cfg.token, cfg.pin, 'michael@dwolla.com', 1.00, {destinationType: 'Email', notes: 'Everyone loves getting money'}, this)
+        Dwolla.send(cfg.pin, 'michael@dwolla.com', 1.00, {destinationType: 'Email', notes: 'Everyone loves getting money'}, this)
     })
     .seq(function(transaction) {
         console.log('Money sent successfully. Transaction ID: ' + transaction);
