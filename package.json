@@ -2,7 +2,7 @@
   "author": "Kenan Shifflett <kenan.shifflett@gmail.com>",
   "contributors": ["Michael Schonfeld <michael@dwolla.com>"],
   "name": "dwolla",
-  "description": "Dwolla API for node.js",
+  "description": "Official NodeJS Wrapper for Dwolla's API",
   "version": "1.0.0",
   "repository": {
     "type": "git",
@@ -11,7 +11,9 @@
   "engines": {
     "node": ">=0.4.7 <0.9.0"
   },
-  "dependencies": {},
+  "dependencies": {
+      "restler": "2.0.1"
+  },
   "devDependencies": {
     "should": ">=0.6.3",
     "mocha": ">=1.2.2"

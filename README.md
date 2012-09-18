@@ -2,7 +2,7 @@
 =================================================================================
 
 ## Version
-1.0.0
+1.0.1
 
 ## Requirements
 
@@ -88,6 +88,16 @@ Offsite Gateway Methods:
     verifyGatewaySignature(signature, checkout_id, amount)      ==> (bool) is signature valid?
     getGatewayURL(destination_id[, params], fn)                 ==> (string) checkout URL
     setMode(mode)                                               ==> (bool) did the mode change successfully?
+
+## Changelog
+
+1.0.1
+
+* Add support for offsite gateway's guest checkout mode
+
+1.0.0
+
+* First revision of major refactor
 
 ## Credits
 
