@@ -61,7 +61,6 @@ Account Methods:
     basicAccountInfo(id, fn)    ==> 
     fullAccountInfo(fn)         ==> (array) the user entity associated with the token
     balance(fn)                 ==> (string) the Dwolla balance of the account associated with the token
-    register(userInfo, fn)      ==> 
 
 Contacts Methods:
 
