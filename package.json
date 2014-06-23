@@ -2,8 +2,8 @@
   "author": "Kenan Shifflett <kenan.shifflett@gmail.com>",
   "contributors": ["Michael Schonfeld <michael@dwolla.com>"],
   "name": "dwolla",
-  "description": "Official NodeJS Wrapper for Dwolla's API",
-  "version": "1.0.0",
+  "description": "Official NodeJS Wrapper for Dwolla's API (based off of Kenan Shifflett's dwolla-node library).",
+  "version": "1.0.2",
   "repository": {
     "type": "git",
     "url": "git@github.com:Dwolla/dwolla-node.git"

@@ -2,13 +2,13 @@
 =================================================================================
 
 ## Version
-1.0.1
+1.0.2
 
 ## Requirements
 
 - [NodeJS](http://www.nodejs.org/)
 - [npm](http://www.npmjs.org/)
-- [Dwolla Application](https://www.dwolla.com/applications)
+- [Dwolla Application Credentials](https://www.dwolla.com/applications)
 
 ## Installation
 
@@ -90,6 +90,12 @@ Offsite Gateway Methods:
 
 ## Changelog
 
+1.0.2
+* Add support for MassPay
+* Remove Register endpoint binding, since that's been deprecated
+* Remove debug console output from helper.js
+* Don't require app key and secret to be passed into requestToken, use credentials previously set during module instantiation instead.
+
 1.0.1
 
 * Add support for offsite gateway's guest checkout mode
@@ -103,12 +109,12 @@ Offsite Gateway Methods:
 This wrapper is a forked extension of Kenan Shifflett's 'node-dwolla' module.
 
 - Kenan Shifflett &lt;kenan.shifflett@gmail.com&gt;
-- Michael Schonfeld &lt;michael@dwolla.com&gt;
+- Gordon Zheng &lt;gordon@dwolla.com&gt;
 
 ## Support
 
-- Dwolla API &lt;api@dwolla.com&gt;
-- Michael Schonfeld &lt;michael@dwolla.com&gt;
+- Dwolla Developer Support &lt;devsupport@dwolla.com&gt;
+- Gordon Zheng &lt;gordon@dwolla.com&gt;
 
 ## References / Documentation
 
@@ -118,7 +124,7 @@ http://developers.dwolla.com/dev
 
 (The MIT License)
 
-Copyright (c) 2012 Dwolla &lt;michael@dwolla.com&gt;
+Copyright (c) 2014 Dwolla &lt;michael@dwolla.com&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
