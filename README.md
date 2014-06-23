@@ -59,7 +59,7 @@ Authentication Methods:
 Account Methods:
 
     basicAccountInfo(id, fn)    ==> 
-    fullAccountInfo(fn)         ==> (array) the user entity associated with the token
+    fullAccountInfo(fn)         ==> (object) the user entity associated with the token
     balance(fn)                 ==> (string) the Dwolla balance of the account associated with the token
 
 Contacts Methods:
@@ -76,9 +76,9 @@ Transactions Methods:
 
     send(pin, destinationId, amount, params, fn)    ==> (string) transaction ID
     request(pin, sourceId, amount, params, fn)      ==> (string) request ID
-    transactionById(id, fn)                         ==> (array) transaction details
+    transactionById(id, fn)                         ==> (object) transaction details
     transactions(params, fn)                        ==> (array) a list of recent transactions matching the search criteria
-    transactionsStats(params, fn)                   ==> (array) statistics about the account associated with the token
+    transactionsStats(params, fn)                   ==> (object) statistics about the account associated with the token
     
 Offsite Gateway Methods:
 
