@@ -1,6 +1,12 @@
 var mockery = require('mockery');
 var events = require('events');
 
+var FAKE_CREDENTIALS = {
+  appKey: 'fakekey',
+  appSecret: 'fakesecret',
+  accessToken: 'faketoken'
+};
+
 /* 
  * Mock the Restler module so we can see requests
  * and provide fake responses.
@@ -46,5 +52,6 @@ mockery.enable({
 // provide fake response:
 
 module.exports = {
-	restlerMock: restlerMock
+	restlerMock: restlerMock,
+  fakeKeys: FAKE_CREDENTIALS
 };
