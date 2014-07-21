@@ -4,7 +4,7 @@ var should = require('should');
 var dwolla = require('../../lib/dwolla')(init.fakeKeys.appKey, init.fakeKeys.appSecret);
 
 
-describe('Contacts', function() {
+describe('Funding', function() {
 	describe('get funding source by id', function() {
 		it('Should make the correct request', function(done) {
 
