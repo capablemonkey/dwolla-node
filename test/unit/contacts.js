@@ -7,9 +7,8 @@ var dwolla = require('../../lib/dwolla')(init.fakeKeys.appKey, init.fakeKeys.app
 describe('Contacts', function() {
 	describe('get contacts', function() {
 		it('Should make the correct request', function(done) {
+		  dwolla.setToken(init.fakeKeys.accessToken);
 	      dwolla.contacts(function() {});
-
-	      dwolla.setToken(init.fakeKeys.accessToken);
 
 	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/contacts/');
 	      init.restlerMock.lastRequest.options.should.eql({query: {oauth_token: init.fakeKeys.accessToken}});
