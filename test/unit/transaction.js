@@ -36,7 +36,7 @@ describe('Transaction', function() {
 		it('Should make the correct request', function(done) {
 
 		  dwolla.setToken(init.fakeKeys.accessToken);
-	      dwolla.transactions(function() {});
+	      dwolla.transactionsStats(function() {});
 
 	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/transactions/stats/');
 	      init.restlerMock.lastRequest.options.should.eql({query: {oauth_token: init.fakeKeys.accessToken}});
@@ -64,7 +64,7 @@ describe('Transaction', function() {
 		  dwolla.setToken(init.fakeKeys.accessToken);
 	      dwolla.request('812-111-1111', '5.00', function() {});
 
-	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/transactions/stats/');
+	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/requests/');
 	      init.restlerMock.lastRequest.options.should.eql({query: {oauth_token: init.fakeKeys.accessToken,  sourceId: '812-111-1111', amount: '5.00'}});
 
 	      done();
