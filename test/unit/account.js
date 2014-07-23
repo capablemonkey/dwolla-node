@@ -41,7 +41,7 @@ describe('Account', function() {
 		  dwolla.setToken(init.fakeKeys.accessToken);
 	      dwolla.toggleAutoWithdraw(true, '1234567', function() {});
 
-	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/accounts/features/auto_withdrawal/');
+	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/accounts/features/auto_withdrawl');
 	      init.restlerMock.lastRequest.options.should.eql({query: {oauth_token: init.fakeKeys.accessToken, enabled: true, fundingId: '1234567'}});
 
 	      done();
@@ -53,7 +53,7 @@ describe('Account', function() {
 		  dwolla.setToken(init.fakeKeys.accessToken);
 	      dwolla.getAutoWithdrawalStatus(function() {});
 
-	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/accounts/features/auto_withdrawal/');
+	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/accounts/features/auto_withdrawl');
 	      init.restlerMock.lastRequest.options.should.eql({query: {oauth_token: init.fakeKeys.accessToken}});
 
 	      done();
