@@ -39,7 +39,7 @@ var restlerMock = {
   postJson: function(url, data) {
   	this.lastRequest = {
     	url: url,
-    	options: options
+    	options: data
     };
 
     this.mockEmitter = new events.EventEmitter();
