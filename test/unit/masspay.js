@@ -17,10 +17,10 @@ describe('MassPay', function() {
 		  initial data. We can use any dummy object in order to mock this and verify
 		  if there are any points of failure. 
 		  */
-	      dwolla.createMassPayJob('12345678', '1234', { item: 'test' }, function() {});
+	      dwolla.createMassPayJob('12345678', '1234', { item: 'test' }, {}, function() {});
 
 	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/masspay/');
-	      init.restlerMock.lastRequest.options.should.eql({query: {oauth_token: init.fakeKeys.accessToken, fundsSource: '12345678', pin: '1234', items: { item: 'test' }}});
+	      init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken, fundsSource: '12345678', pin: '1234', items: { item: 'test' }});
 
 	      done();
 	    });
