@@ -17,6 +17,10 @@ var FAKE_CREDENTIALS = {
  *
  * restlerMock.mockEmitter.emit('complete', 'RESPONSE HERE')
  *
+ * We can access the last request made:
+ * 
+ * restlerMock.lastRequest.url
+ * restlerMock.lastRequest.options   // any querystrings or JSON request body
  */
 
 var restlerMock = {
