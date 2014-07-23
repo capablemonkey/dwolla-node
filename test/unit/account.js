@@ -17,11 +17,7 @@ describe('Account', function() {
     });
 
     it('Should correctly parse sample API response', function(done) {
-    	init.restlerMock.mockEmitter.emit('complete', '{
-		    "Success": true,
-		    "Message": "Success",
-		    "Response": 19.15
-			}');
+    	init.restlerMock.mockEmitter.emit('complete', '{"Success": true,"Message": "Success","Response": 19.15}');
     });
 	});
 
