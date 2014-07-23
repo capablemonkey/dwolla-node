@@ -60,21 +60,10 @@ describe('Account', function() {
 	    });
 	});
 
-	describe('basic account info', function() {
-		it('Should make the correct request', function(done) {
-	      dwolla.basicAccountInfo('812-111-1111', function() {});
-
-	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/users/812-111-1111');
-	      init.restlerMock.lastRequest.options.should.eql({query: {client_id: init.fakeKeys.appKey, client_secret: init.fakeKeys.appSecret}});
-
-	      done();
-	    });
-	});
-
 	describe('full account info', function() {
 		it('Should make the correct request', function(done) {
 		  dwolla.setToken(init.fakeKeys.accessToken);
-	      dwolla.balance(function() {});
+	      dwolla.fullAccountInfo(function() {});
 
 	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/users/');
 	      init.restlerMock.lastRequest.options.should.eql({query: {oauth_token: init.fakeKeys.accessToken}});
