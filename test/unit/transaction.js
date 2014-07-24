@@ -58,17 +58,18 @@ describe('Transaction', function() {
 	    });
 	});
 
-	describe('make money request', function() {
-		it('Should make the correct request', function(done) {
+    describe('process a refund', function() {
+        it('Should make the correct request', function(done) {
 
-		  dwolla.setToken(init.fakeKeys.accessToken);
-	      dwolla.request('812-111-1111', '5.00', function() {});
+            dwolla.setToken(init.fakeKeys.accessToken);
+            dwolla.refund('1234', '12345678', '987654321', '10.00', function() {});
 
-	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/requests/');
-	      init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken, sourceId: '812-111-1111', amount: '5.00'});
+            init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/transactions/refund/');
+            init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken, pin: '1234', transactionId: '12345678', fundsSource: '987654321', amount: '10.00'});
 
-	      done();
-	    });
-	});
+            done();
+        });
+    });
+
 
 });
