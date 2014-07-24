@@ -1,6 +1,5 @@
 var Dwolla = require('dwolla')()    // Include the Dwolla REST Client
     , cfg = require('./_config')    // Include any required keys
-    , $ = require('seq')
     ;
 
 // Seed the user's OAuth token
@@ -10,29 +9,18 @@ Dwolla.setToken(cfg.token);
  * EXAMPLE 1: 
  *   Send money ($1.00) to a Dwolla ID 
  **/
-$()
-    .seq(function() {
-        Dwolla.send(cfg.pin, '812-626-8794', 1.00, this)
-    })
-    .seq(function(transaction) {
-        console.log('Money sent successfully. Transaction ID: ' + transaction);
-    })
-    .catch(function(error) {
-        console.log('Oops: ' + error);
-    })
-    
-    
+
+Dwolla.send(cfg.pin, '812-626-8794', 1.00, function(err, data) {
+   if (err) { console.log(err); }
+   console.log(data);
+});
+
 /**
  * EXAMPLE 2: 
  *   Send money ($1.00) to an email address, with a note
  **/
-$()
-    .seq(function() {
-        Dwolla.send(cfg.pin, 'michael@dwolla.com', 1.00, {destinationType: 'Email', notes: 'Everyone loves getting money'}, this)
-    })
-    .seq(function(transaction) {
-        console.log('Money sent successfully. Transaction ID: ' + transaction);
-    })
-    .catch(function(error) {
-        console.log('Oops: ' + error);
-    })
+
+Dwolla.send(cfg.pin, 'michael@dwolla.com', 1.00, {destinationType: 'Email', notes: 'Thanks for the coffee!'}, function(err, data) {
+   if (err) { console.log(err); }
+   console.log(data);
+});
