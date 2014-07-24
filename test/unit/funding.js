@@ -18,7 +18,7 @@ describe('Funding', function() {
 	    });
 	});
 
-	describe('get funding sources'), function() {
+	describe('get funding sources', function() {
 		  it('Should make the correct request', function(done) {
 		  
 		  dwolla.setToken(init.fakeKeys.accessToken);
@@ -28,5 +28,6 @@ describe('Funding', function() {
 	      init.restlerMock.lastRequest.options.should.eql({query: {oauth_token: init.fakeKeys.accessToken}});
 
 	      done();
+	    });
 	});
 });
