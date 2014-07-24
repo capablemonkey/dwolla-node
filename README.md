@@ -20,13 +20,13 @@ Automatic installation:
 ## Usage
 
 ```javascript
-// Instantiate a Dwolla API object
+// Instantiate a Dwolla API client
 var Dwolla = require('dwolla')(['{CLIENT_ID}', '{CLIENT_SECRET}']);
 
-// Seed the user's OAuth token
+// Set a user's OAuth token
 Dwolla.setToken('[TOKEN]');
 
-// Send money to a given Dwolla ID
+// Send money to a Dwolla ID: 812-626-8794
 Dwolla.send('[PIN]', '812-626-8794', 1.00, function(error, transactionId) {
     if(error) { console.log('Error: ' + error); }
 
@@ -59,9 +59,11 @@ Authentication Methods:
 
 Account Methods:
 
-    basicAccountInfo(id, fn)    ==> 
-    fullAccountInfo(fn)         ==> (object) the user entity associated with the token
-    balance(fn)                 ==> (string) the Dwolla balance of the account associated with the token
+    basicAccountInfo(id, fn)                    ==> (object) user profile for given email address or Dwolla ID
+    fullAccountInfo(fn)                         ==> (object) the user entity associated with the token
+    balance(fn)                                 ==> (string) the Dwolla balance of the account associated with the token
+    toggleAutoWithdraw(enabled, fundingId, fn)  ==> (object) current {Enabled, FundingId}
+    getAutoWithdrawalStatus(fn)                 ==> (object) current {Enabled, FundingId}
 
 Contacts Methods:
 
