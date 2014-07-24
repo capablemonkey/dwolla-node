@@ -1,8 +1,9 @@
-# dwolla-node: Node Wrapper for Dwolla's API
+# dwolla-node: official node.js wrapper for Dwolla's API
 =================================================================================
+Bindings for the Dwolla API.  All API methods are asynchronous.
 
 ## Version
-1.0.2
+1.1.0
 
 ## Requirements
 
@@ -90,6 +91,10 @@ Offsite Gateway Methods:
 
 ## Changelog
 
+1.1.0
+* Add unit tests to validate HTTP requests
+* Add support for Auto-Withdrawal endpoints
+
 1.0.2
 * Add support for MassPay
 * Remove Register endpoint binding, since that's been deprecated
@@ -103,6 +108,14 @@ Offsite Gateway Methods:
 1.0.0
 
 * First revision of major refactor
+
+## Tests
+
+To run unit tests, do:
+
+`mocha ./test/unit`
+
+Currently, unit tests only ensure HTTP requests created by the bindings are valid.  We plan to add support for testing sample API responses against the bindings.  Eventually, we'd also like to support live testing against the sandbox API.
 
 ## Credits
 
@@ -119,6 +132,10 @@ This wrapper is a forked extension of Kenan Shifflett's 'node-dwolla' module.
 ## References / Documentation
 
 http://developers.dwolla.com/dev
+
+## TODO
+
+1. Use `nock` module to mock `http` instead of mocking `restler` with `mockery` because the former lets us validate restler's behavior, which we are today assuming will always work as expected.
 
 ## License 
 
