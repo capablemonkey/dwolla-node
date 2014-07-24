@@ -1,6 +1,5 @@
 var Dwolla = require('dwolla')()    // Include the Dwolla REST Client
     , cfg = require('./_config')    // Include any required keys
-    , $ = require('seq')
     ;
 
 // Seed the user's OAuth token
@@ -12,33 +11,20 @@ Dwolla.setToken(cfg.accessToken);
  *   account associated with the provided
  *   OAuth token
  **/
-$()
-    .seq(function() {
-        Dwolla.contacts(this)
-    })
-    .seq(function(contacts) {
-        console.log('Contacts found:');
-        console.log(contacts);
-    })
-    .catch(function(error) {
-        console.log('Oops: ' + error);
-    })
-    
-    
+
+Dwolla.contacts(function(err, data){
+   if (err) { console.log(err); }
+   console.log(data);
+});
+
 /**
  * EXAMPLE 2: 
  *   Search through the contacts of the
  *   account associated with the provided
  *   OAuth token
  **/
-$()
-    .seq(function() {
-        Dwolla.contacts({search: 'Ben'}, this)
-    })
-    .seq(function(contacts) {
-        console.log('Contacts found:');
-        console.log(contacts);
-    })
-    .catch(function(error) {
-        console.log('Oops: ' + error);
-    })
+
+Dwolla.contacts({search: 'Ben'}, function(err, data){
+   if (err) { console.log(err); }
+   console.log(data);
+});
