@@ -119,15 +119,16 @@ Currently, unit tests only ensure HTTP requests created by the bindings are vali
 
 ## Credits
 
-This wrapper is a forked extension of Kenan Shifflett's 'node-dwolla' module.
+This wrapper is a forked extension of Kenan Shifflett's 'node-dwolla' module.  Michael Schonfeld did much of the initial refactoring of `node-dwolla`.
 
 - Kenan Shifflett &lt;kenan.shifflett@gmail.com&gt;
 - Gordon Zheng &lt;gordon@dwolla.com&gt;
+- David Stancu &lt;david@dwolla.com&gt;
+- Michael Schonfeld &lt;michael@schonfeld.org&gt;
 
 ## Support
 
 - Dwolla Developer Support &lt;devsupport@dwolla.com&gt;
-- Gordon Zheng &lt;gordon@dwolla.com&gt;
 
 ## References / Documentation
 
@@ -141,7 +142,7 @@ http://developers.dwolla.com/dev
 
 (The MIT License)
 
-Copyright (c) 2014 Dwolla &lt;michael@dwolla.com&gt;
+Copyright (c) 2014 Dwolla &lt;api@dwolla.com&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
