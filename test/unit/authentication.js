@@ -1,5 +1,6 @@
 var init = require('./testInit');
 var should = require('should');
+var util = require('util');
 
 var dwolla = require('../../lib/dwolla')(init.fakeKeys.appKey, init.fakeKeys.appSecret);
 
@@ -8,18 +9,29 @@ describe('Authentication', function() {
 	describe('oauth initiation URL', function() {
 		it('Should be valid for sandbox environment', function(done) {
 			dwolla.sandbox = true;
-			var url = dwolla.authUrl("https://www.google.com/");
+			var redirect = "https://www.google.com/";
+			var url = dwolla.authUrl(redirect);
 
-			url.should.equal('https://uat.dwolla.com/oauth/v2/authenticate?client_id=JCGQXLrlfuOqdUYdTcLz3rBiCZQDRvdWIUPkw%2B%2BGMuGhkem9Bo&response_type=code&scope=Send%7CTransactions%7CBalance%7CRequest%7CContacts%7CAccountInfoFull%7CFunding%7CManageAccount&redirect_uri=https%3A%2F%2Fwww.google.com%2F');
+			var format = 'https://uat.dwolla.com/oauth/v2/authenticate?client_id=%s&response_type=code&scope=Send%7CTransactions%7CBalance%7CRequest%7CContacts%7CAccountInfoFull%7CFunding%7CManageAccount&redirect_uri=%s';
+
+			url.should.equal(util.format(format, encodeURIComponent(init.fakeKeys.appKey), encodeURIComponent(redirect)));
 			done();
 		});
 
-		it('Should be valid for sandbox environment', function(done) {
+		it('Should be valid for production environment', function(done) {
 			dwolla.sandbox = false;
-			var url = dwolla.authUrl("https://www.google.com/");
+			var redirect = "https://www.google.com/";
+			var url = dwolla.authUrl(redirect);
 
-			url.should.equal('https://www.dwolla.com/oauth/v2/authenticate?client_id=JCGQXLrlfuOqdUYdTcLz3rBiCZQDRvdWIUPkw%2B%2BGMuGhkem9Bo&response_type=code&scope=Send%7CTransactions%7CBalance%7CRequest%7CContacts%7CAccountInfoFull%7CFunding%7CManageAccount&redirect_uri=https%3A%2F%2Fwww.google.com%2F');
+			var format = 'https://www.dwolla.com/oauth/v2/authenticate?client_id=%s&response_type=code&scope=Send%7CTransactions%7CBalance%7CRequest%7CContacts%7CAccountInfoFull%7CFunding%7CManageAccount&redirect_uri=%s';
+
+			url.should.equal(util.format(format, encodeURIComponent(init.fakeKeys.appKey), encodeURIComponent(redirect)));
 			done();
+		});
+
+		after(function() {
+			// tearDown: set sandbox back to false so other tests expecting www don't get messed up!
+			dwolla.sandbox = false;
 		});
 	});
 
