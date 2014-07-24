@@ -22,16 +22,6 @@ describe('Offsite Gateway', function() {
 	    });
 	});
 
-	describe('add an item to cart', function() {
-		it('Should add the correct item', function(done) {
-
-	      dwolla.addGatewayProduct('Test', 1, 'Test Description', 2).should.equal(true);
-	      dwolla.gatewaySession.should.equal([{'Name': 'Test', 'Description': 'Test Description', 'Price': 1, 'Quantity': 2}]);
-
-	      done();
-	    });
-	});
-
 	describe('create checkout session', function() {
 		it('Should make the correct request', function(done) {
 
