@@ -29,7 +29,7 @@ var restlerMock = {
   get: function(url, options) {
     this.lastRequest = {
     	url: url,
-    	options: options
+    	options: options.query
     };
 
     // store and return fake RestRequest object:
