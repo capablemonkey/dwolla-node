@@ -96,6 +96,7 @@ Offsite Gateway Methods:
 1.1.0
 * Add unit tests to validate HTTP requests
 * Add support for Auto-Withdrawal endpoints
+* Add support for new expiring OAuth access tokens and refresh tokens
 
 1.0.2
 * Add support for MassPay
