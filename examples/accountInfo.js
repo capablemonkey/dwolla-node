@@ -3,7 +3,7 @@ var Dwolla = require('dwolla')(cfg.apiKey, cfg.apiSecret)   // Include the Dwoll
     ;
 
 // Seed the user's OAuth token
-Dwolla.setToken(cfg.token);
+Dwolla.setToken(cfg.accessToken);
 
 /**
  * EXAMPLE 1: 

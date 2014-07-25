@@ -3,7 +3,7 @@ var Dwolla = require('dwolla')()    // Include the Dwolla REST Client
     ;
 
 // Seed the user's OAuth token
-Dwolla.setToken(cfg.token);
+Dwolla.setToken(cfg.accessToken);
 
 /***
  * Example 1:
