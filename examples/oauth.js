@@ -29,7 +29,7 @@ app.get('/', function(req, res) {
  * STEP 2:
  *   Exchange the temporary code given
  *   to us in the querystring, for
- *   a never-expiring OAuth access token
+ *   an access token and refresh token.
  **/
 app.get('/oauth_return', function(req, res) {
     var code = req.query.code;
@@ -40,6 +40,12 @@ app.get('/oauth_return', function(req, res) {
         return res.send(output);
     });
 });
+
+/**
+ * STEP 3:
+ *  Use a refresh token to get a new
+ *  access token and refresh token pair.
+ **/
 
 app.get('/refresh', function(req, res) {
     Dwolla.refreshAuth(req.query.refreshToken, function(error, auth) {
