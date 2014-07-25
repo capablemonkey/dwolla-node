@@ -1,18 +1,22 @@
-var Dwolla = require('dwolla')(cfg.apiKey, cfg.apiSecret)   // Include the Dwolla REST Client
-    , cfg = require('./_config')                            // Include any required keys
-    , $ = require('seq')
-    , express = require('express')
-    , app = express()
-    ;
+var cfg = require('./_config'); // require any needed keys
+var Dwolla = require('dwolla')(cfg.apiKey, cfg.apiSecret); // initialize API client
+var $ = require('seq');
+var express = require('express');
+var app = express();
 
 // Some constants...
-var redirect_uri = 'http://localhost:3000/oauth_return'
+var redirect_uri = 'http://localhost:3000/oauth_return';
+
+// use sandbox API environment
+Dwolla.sandbox = true;
 
 
 /**
  * STEP 1: 
  *   Create an authentication URL
  *   that the user will be redirected to
+ * 
+ *   Visit http://localhost:3000/ to see it in action.
  **/
 app.get('/', function(req, res) {
     var authUrl = Dwolla.authUrl(redirect_uri);
@@ -28,10 +32,20 @@ app.get('/', function(req, res) {
  *   a never-expiring OAuth access token
  **/
 app.get('/oauth_return', function(req, res) {
-    var code = req.query['code'];
+    var code = req.query.code;
 
-    Dwolla.requestToken(code, redirect_uri, function(error, token) {
-        return res.send("Your never-expiring OAuth access token is: <b>" + token + "</b>");
+    Dwolla.finishAuth(code, redirect_uri, function(error, auth) {
+        var output = "Your OAuth access_token is: <b>" + auth.access_token + "</b>, which will expire in " + auth.expires_in + " seconds.<br>Your refresh_token is: <b>" + auth.refresh_token + "</b>, and that'll expire in " + auth.refresh_expires_in + " seconds.";
+        output += '<br><a href="/refresh?refreshToken=' + auth.refresh_token + '">Click here to get a new access and refresh token pair!</a>';
+        return res.send(output);
+    });
+});
+
+app.get('/refresh', function(req, res) {
+    Dwolla.refreshAuth(req.query.refreshToken, function(error, auth) {
+        var output = "Your OAuth access_token is: <b>" + auth.access_token + "</b>, which will expire in " + auth.expires_in + " seconds.<br>Your refresh_token is: <b>" + auth.refresh_token + "</b>, and that'll expire in " + auth.refresh_expires_in + " seconds.";
+        output += '<br><a href="/refresh?refreshToken=' + auth.refresh_token + '">Click here to get a new access and refresh token pair!</a>';
+        return res.send(output);
     });
 });
 
