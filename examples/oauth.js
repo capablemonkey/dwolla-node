@@ -36,7 +36,7 @@ app.get('/oauth_return', function(req, res) {
 
     Dwolla.finishAuth(code, redirect_uri, function(error, auth) {
         var output = "Your OAuth access_token is: <b>" + auth.access_token + "</b>, which will expire in " + auth.expires_in + " seconds.<br>Your refresh_token is: <b>" + auth.refresh_token + "</b>, and that'll expire in " + auth.refresh_expires_in + " seconds.";
-        output += '<br><a href="/refresh?refreshToken=' + auth.refresh_token + '">Click here to get a new access and refresh token pair!</a>';
+        output += '<br><a href="/refresh?refreshToken=' + encodeURIComponent(auth.refresh_token) + '">Click here to get a new access and refresh token pair!</a>';
         return res.send(output);
     });
 });
@@ -49,8 +49,10 @@ app.get('/oauth_return', function(req, res) {
 
 app.get('/refresh', function(req, res) {
     Dwolla.refreshAuth(req.query.refreshToken, function(error, auth) {
+        if (error) return res.send(error);
+
         var output = "Your OAuth access_token is: <b>" + auth.access_token + "</b>, which will expire in " + auth.expires_in + " seconds.<br>Your refresh_token is: <b>" + auth.refresh_token + "</b>, and that'll expire in " + auth.refresh_expires_in + " seconds.";
-        output += '<br><a href="/refresh?refreshToken=' + auth.refresh_token + '">Click here to get a new access and refresh token pair!</a>';
+        output += '<br><a href="/refresh?refreshToken=' + encodeURIComponent(auth.refresh_token) + '">Click here to get a new access and refresh token pair!</a>';
         return res.send(output);
     });
 });
