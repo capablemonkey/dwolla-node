@@ -67,4 +67,15 @@ describe('Account', function() {
 	    });
 	});
 
+	describe('get nearby users', function() {
+		it('Should make the correct request', function(done) {
+	      dwolla.nearbyUsers('45', '45', function() {});
+
+	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/users/nearby/');
+	      init.restlerMock.lastRequest.options.should.eql({client_id: init.fakeKeys.appKey, client_secret: init.fakeKeys.appSecret, latitude: '45', longitude: '45'});
+	      done();
+	    });
+	});
+
+
 });
