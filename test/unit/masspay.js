@@ -33,7 +33,7 @@ describe('MassPay', function() {
 	      dwolla.getMassPayJob('12345678', function() {});
 
 	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/masspay/12345678');
-	      init.restlerMock.lastRequest.options.should.eql({query: {oauth_token: init.fakeKeys.accessToken}});
+	      init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken});
 
 	      done();
 	    });
@@ -46,7 +46,7 @@ describe('MassPay', function() {
 	      dwolla.getMassPayJobItems('12345678', function() {});
 
 	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/masspay/12345678/items');
-	      init.restlerMock.lastRequest.options.should.eql({query: {oauth_token: init.fakeKeys.accessToken}});
+	      init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken});
 
 	      done();
 	    });

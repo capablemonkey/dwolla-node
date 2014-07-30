@@ -12,7 +12,7 @@ describe('Funding', function() {
 	      dwolla.fundingSourceById('9999999', function() {});
 
 	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/fundingsources/9999999');
-	      init.restlerMock.lastRequest.options.should.eql({query: {oauth_token: init.fakeKeys.accessToken}});
+	      init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken});
 
 	      done();
 	    });
@@ -25,7 +25,7 @@ describe('Funding', function() {
 	      dwolla.fundingSources(function() {});
 
 	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/fundingsources/');
-	      init.restlerMock.lastRequest.options.should.eql({query: {oauth_token: init.fakeKeys.accessToken}});
+	      init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken});
 
 	      done();
 	    });
@@ -38,7 +38,7 @@ describe('Funding', function() {
             dwolla.addFundingSource('12345678', '87654321', 'Checking', 'My Bank', function() {});
 
             init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/fundingsources/');
-            init.restlerMock.lastRequest.options.should.eql({query: {oauth_token: init.fakeKeys.accessToken, account_number: '12345678', routing_number: '87654321', account_type: 'Checking', name: 'My Bank'}});
+            init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken, account_number: '12345678', routing_number: '87654321', account_type: 'Checking', name: 'My Bank'});
 
             done();
         });
@@ -51,7 +51,7 @@ describe('Funding', function() {
             dwolla.verifyFundingSource('0.02', '0.05', '12345678', function() {});
 
             init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/fundingsources/12345678/verify/');
-            init.restlerMock.lastRequest.options.should.eql({query: {oauth_token: init.fakeKeys.accessToken, deposit1: '0.02', deposit2: '0.05'}});
+            init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken, deposit1: '0.02', deposit2: '0.05'});
 
             done();
         });
@@ -64,7 +64,7 @@ describe('Funding', function() {
             dwolla.withdrawFromFundingSource('1234', '5.00', '12345678', function() {});
 
             init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/fundingsources/12345678/withdraw/');
-            init.restlerMock.lastRequest.options.should.eql({query: {oauth_token: init.fakeKeys.accessToken, pin: '1234', amount: '5.00', fundingId: '12345678'}});
+            init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken, pin: '1234', amount: '5.00'});
 
             done();
         });

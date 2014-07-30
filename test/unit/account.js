@@ -10,7 +10,7 @@ describe('Account', function() {
 			dwolla.balance(function() {return;});
 
       init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/balance/');
-      init.restlerMock.lastRequest.options.should.eql({query: {oauth_token: init.fakeKeys.accessToken}});
+      init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken});
 
       done();
     });
@@ -22,10 +22,10 @@ describe('Account', function() {
 			dwolla.basicAccountInfo(FAKE_EMAIL, function() {return;});
 
 			init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/users/' + FAKE_EMAIL);
-			init.restlerMock.lastRequest.options.should.eql({query: {
+			init.restlerMock.lastRequest.options.should.eql({
 				client_id: init.fakeKeys.appKey,
 				client_secret: init.fakeKeys.appSecret
-			}});
+			});
 
 			done();
 		});
@@ -37,7 +37,7 @@ describe('Account', function() {
 	      dwolla.toggleAutoWithdraw(true, '1234567', function() {});
 
 	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/accounts/features/auto_withdrawl');
-	      init.restlerMock.lastRequest.options.should.eql({query: {oauth_token: init.fakeKeys.accessToken, enabled: true, fundingId: '1234567'}});
+	      init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken, enabled: true, fundingId: '1234567'});
 
 	      done();
 	    });
@@ -49,7 +49,7 @@ describe('Account', function() {
 	      dwolla.getAutoWithdrawalStatus(function() {});
 
 	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/accounts/features/auto_withdrawl');
-	      init.restlerMock.lastRequest.options.should.eql({query: {oauth_token: init.fakeKeys.accessToken}});
+	      init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken});
 
 	      done();
 	    });
@@ -61,7 +61,7 @@ describe('Account', function() {
 	      dwolla.fullAccountInfo(function() {});
 
 	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/users/');
-	      init.restlerMock.lastRequest.options.should.eql({query: {oauth_token: init.fakeKeys.accessToken}});
+	      init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken});
 
 	      done();
 	    });

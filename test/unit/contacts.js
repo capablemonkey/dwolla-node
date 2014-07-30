@@ -11,7 +11,7 @@ describe('Contacts', function() {
 	      dwolla.contacts(function() {});
 
 	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/contacts/');
-	      init.restlerMock.lastRequest.options.should.eql({query: {oauth_token: init.fakeKeys.accessToken}});
+	      init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken});
 
 	      done();
 	    });
@@ -22,7 +22,7 @@ describe('Contacts', function() {
 	      dwolla.nearby(init.fakeKeys.appKey, init.fakeKeys.appSecret, '35', '25', function() {});
 
 	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/contacts/nearby');
-	      init.restlerMock.lastRequest.options.should.eql({query: {client_id: init.fakeKeys.appKey, client_secret: init.fakeKeys.appSecret, latitude: '35', longitude: '25'}});
+	      init.restlerMock.lastRequest.options.should.eql({client_id: init.fakeKeys.appKey, client_secret: init.fakeKeys.appSecret, latitude: '35', longitude: '25'});
 
 	      done();
 			});
