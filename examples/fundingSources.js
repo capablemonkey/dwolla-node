@@ -57,10 +57,21 @@ Dwolla.verifyFundingSource('0.02', '0.05', '12345678', function(err, data) {
 /**
  * Example 5:
  *
- * Withdraw $10 to a funding source with ID '12345678'
+ * Withdraw $10 from the user's account balance to a funding source with ID '12345678'
  */
 
-Dwolla.withdrawFromFundingSource(cfg.pin, '10.00', '12345678', function(err, data) {
+Dwolla.withdrawToFundingSource(cfg.pin, '10.00', '12345678', function(err, data) {
+   if (err) { console.log(err); }
+   console.log(data);
+});
+
+/**
+ * Example 6:
+ *
+ * Deposit $10 from the user's funding source of ID '12345678' to the user's Dwolla account balance.
+ */
+
+Dwolla.depositFromFundingSource(cfg.pin, '10.00', '12345678', function(err, data) {
    if (err) { console.log(err); }
    console.log(data);
 });

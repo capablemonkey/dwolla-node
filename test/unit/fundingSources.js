@@ -50,20 +50,33 @@ describe('Funding', function() {
             dwolla.setToken(init.fakeKeys.accessToken);
             dwolla.verifyFundingSource('0.02', '0.05', '12345678', function() {});
 
-            init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/fundingsources/12345678/verify/');
+            init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/fundingsources/12345678/verify');
             init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken, deposit1: '0.02', deposit2: '0.05'});
 
             done();
         });
     });
 
-    describe('withdraw from funding source', function() {
+    describe('withdraw from account balance to funding source', function() {
         it('Should make the correct request', function(done) {
 
             dwolla.setToken(init.fakeKeys.accessToken);
-            dwolla.withdrawFromFundingSource('1234', '5.00', '12345678', function() {});
+            dwolla.withdrawToFundingSource('1234', '5.00', '12345678', function() {});
 
-            init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/fundingsources/12345678/withdraw/');
+            init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/fundingsources/12345678/withdraw');
+            init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken, pin: '1234', amount: '5.00'});
+
+            done();
+        });
+    });
+
+    describe('deposit from funding source to account balance', function() {
+        it('Should make the correct request', function(done) {
+
+            dwolla.setToken(init.fakeKeys.accessToken);
+            dwolla.depositFromFundingSource('1234', '5.00', '12345678', function() {});
+
+            init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/fundingsources/12345678/deposit');
             init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken, pin: '1234', amount: '5.00'});
 
             done();
