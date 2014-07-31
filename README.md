@@ -1,23 +1,23 @@
-# dwolla-node: official node.js wrapper for Dwolla's API
-=================================================================================
+# dwolla-node: official Dwolla API node.js wrapper 
+===========
 Bindings for the Dwolla API.  All API methods are asynchronous.
+
+Contributions are welcomed with open arms.
 
 ## Version
 1.1.0
 
-## Requirements
-
-- [NodeJS](http://www.nodejs.org/)
-- [npm](http://www.npmjs.org/)
-- [Dwolla Application Credentials](https://www.dwolla.com/applications)
-
 ## Installation
-
-Automatic installation:
 
     npm install dwolla
 
+## Documentation
+
+[http://developers.dwolla.com/dev/docs](http://developers.dwolla.com/dev/docs)
+
 ## Usage
+
+You'll need [Dwolla API Credentials](https://www.dwolla.com/applications) to interact with the Dwolla API.
 
 ```javascript
 // Instantiate a Dwolla API client
@@ -25,6 +25,9 @@ var Dwolla = require('dwolla')(['{CLIENT_ID}', '{CLIENT_SECRET}']);
 
 // Set a user's OAuth token
 Dwolla.setToken('[TOKEN]');
+
+// Use the Sandbox API environment, instead of production
+Dwolla.sandbox = true;
 
 // Send money to a Dwolla ID: 812-626-8794
 Dwolla.send('[PIN]', '812-626-8794', 1.00, function(error, transactionId) {
@@ -43,7 +46,11 @@ This repo includes various usage examples, including:
 * Fetching account information [accountInfo.js]
 * Grabbing a user's contacts [contacts.js]
 * Listing a user's funding sources [fundingSources.js]
-* Creating offsite gateway sessions [offsiteGateway.js]
+* Creating Gateway Checkout sessions [offsiteGateway.js]
+* Enable or check an account's Auto-Withdrawal feature [autoWithdrawal.js]
+* Fetch a user's account balance [balance.js]
+* Listing or searching a user's contacts [contacts.js]
+* Creating a money request, and listing a user's pending money requests [requests.js]
 
 ## Methods
 
@@ -55,7 +62,8 @@ Helper Methods:
 Authentication Methods:
 
     authUrl([redirect_uri, scope])          ==> (string) OAuth permissions page URL
-    requestToken(code[, redirect_uri, fn])  ==> (string) a never-expiring OAuth access token
+    finishAuth(code[, redirect_uri, fn])  ==> (object) access_token, refresh_token, expiration times
+    refreshAuth(refresh_token, fn)      ==> (object) access_token, refresh_token, expiration times
 
 Account Methods:
 
@@ -73,16 +81,27 @@ Contacts Methods:
 Funding Sources Methods:
 
     fundingSources(fn)          ==> (array) a list of funding sources associated with the token
-    fundingSourceById(id, fn)   ==> (array) information about the {$id} funding source
+    fundingSourceById(id, fn)   ==> (object) information about the {$id} funding source
+    addFundingSource(account_number, routing_number, account_type, name, fn)    ==>  (object) the new, unverified funding source resource
+    verifyFundingSource(deposit1, deposit2, fundingId, fn)  ==> (object) funding source resource
+    withdrawToFundingSource(pin, amount, fundingId, fn)  ==> (object) the resulting Withdraw transaction
+    depositFromFundingSource(pin, amount, fundingId, fn) ==> (object) the resulting Deposit transaction
 
 Transactions Methods:
 
     send(pin, destinationId, amount, params, fn)    ==> (string) transaction ID
-    request(pin, sourceId, amount, params, fn)      ==> (string) request ID
     transactionById(id, fn)                         ==> (object) transaction details
     transactions(params, fn)                        ==> (array) a list of recent transactions matching the search criteria
     transactionsStats(params, fn)                   ==> (object) statistics about the account associated with the token
+    refund(pin, transactionId, fundsSource, amount, params, fn)         => (object) resulting Refund transaction resource
     
+Money Request Methods:
+    request(pin, sourceId, amount, params, fn)      ==> (string) request ID
+    requests(params, fn)        ==> (array) list of Request resources
+    requestById(request_id, fn)     ==> (object) a Request resource
+    cancelRequest(request_id, fn)   ==> (bool) true if successfully cancelled, otherwise, error 
+    fulfillRequest(pin, request_id, amount, params, fn)     ==> (object) the Request resource
+
 Offsite Gateway Methods:
 
     startGatewaySession(redirectUri)                            ==> (bool) did session start?
@@ -97,6 +116,8 @@ Offsite Gateway Methods:
 * Add unit tests to validate HTTP requests
 * Add support for Auto-Withdrawal endpoints
 * Add support for new expiring OAuth access tokens and refresh tokens
+* Add support for adding funding sources, verifying them, withdraw, deposit
+* Add support for Money requests listing, cancel, fulfill, lookup
 
 1.0.2
 * Add support for MassPay
@@ -132,10 +153,6 @@ This wrapper is a forked extension of Kenan Shifflett's 'node-dwolla' module.  M
 ## Support
 
 - Dwolla Developer Support &lt;devsupport@dwolla.com&gt;
-
-## References / Documentation
-
-http://developers.dwolla.com/dev
 
 ## TODO
 
