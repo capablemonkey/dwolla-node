@@ -96,6 +96,7 @@ Transactions Methods:
     refund(pin, transactionId, fundsSource, amount, params, fn)         => (object) resulting Refund transaction resource
     
 Money Request Methods:
+
     request(pin, sourceId, amount, params, fn)      ==> (string) request ID
     requests(params, fn)        ==> (array) list of Request resources
     requestById(request_id, fn)     ==> (object) a Request resource
