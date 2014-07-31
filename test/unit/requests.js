@@ -52,7 +52,7 @@ describe('Requests', function() {
             dwolla.setToken(init.fakeKeys.accessToken);
             dwolla.cancelRequest('12345678', function () {});
 
-            init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/requests/12345678/cancel/');
+            init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/requests/12345678/cancel');
             init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken});
 
             done();
@@ -65,7 +65,7 @@ describe('Requests', function() {
             dwolla.setToken(init.fakeKeys.accessToken);
             dwolla.fulfillRequest('1234', '12345678', '10.00', function () {});
 
-            init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/requests/12345678/fulfill/');
+            init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/requests/12345678/fulfill');
             init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken, pin: '1234', request_id: '12345678', amount: '10.00'});
 
             done();
