@@ -51,6 +51,7 @@ This repo includes various usage examples, including:
 * Fetch a user's account balance [balance.js]
 * Listing or searching a user's contacts [contacts.js]
 * Creating a money request, and listing a user's pending money requests [requests.js]
+* Getting transactions, transaction statistics, and processing refunds [transactions.js]
 
 ## Methods
 
