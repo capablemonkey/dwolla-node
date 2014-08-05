@@ -46,7 +46,7 @@ This repo includes various usage examples, including:
 * Fetching account information [accountInfo.js]
 * Grabbing a user's contacts [contacts.js]
 * Listing a user's funding sources [fundingSources.js]
-* Creating Gateway Checkout sessions [offsiteGateway.js]
+* Creating Gateway Checkout sessions [checkouts.js]
 * Enable or check an account's Auto-Withdrawal feature [autoWithdrawal.js]
 * Fetch a user's account balance [balance.js]
 * Listing or searching a user's contacts [contacts.js]
