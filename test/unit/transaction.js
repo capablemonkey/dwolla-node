@@ -58,18 +58,27 @@ describe('Transaction', function() {
 	    });
 	});
 
-    describe('process a refund', function() {
-        it('Should make the correct request', function(done) {
+  describe('process a refund', function() {
+    it('Should make the correct request', function(done) {
 
-            dwolla.setToken(init.fakeKeys.accessToken);
-            dwolla.refund('1234', '12345678', '987654321', '10.00', function() {});
+      dwolla.setToken(init.fakeKeys.accessToken);
+      dwolla.refund('1234', '12345678', '987654321', '10.00', function() {});
 
-            init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/transactions/refund');
-            init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken, pin: '1234', transactionId: '12345678', fundsSource: '987654321', amount: '10.00'});
+      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/transactions/refund');
+      init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken, pin: '1234', transactionId: '12345678', fundsSource: '987654321', amount: '10.00'});
 
-            done();
-        });
+      done();
     });
+  });
 
+  describe('transactions by app', function() {
+		it('Should make the correct request', function(done) {
+			dwolla.transactionsByApp({limit: 10}, function() {});
 
+			init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/transactions/');
+	    init.restlerMock.lastRequest.options.should.eql({client_id: init.fakeKeys.appKey, client_secret: init.fakeKeys.appSecret, limit: 10});
+			
+			done();
+		});
+  });
 });
