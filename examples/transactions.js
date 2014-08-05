@@ -42,6 +42,18 @@ Dwolla.transactionsStats(function(err, data){
 /**
  * Example 4:
  *
+ * Retrieve the 10 recentmost transactions which
+ * have been facilitated by the requesting application.
+ */
+
+Dwolla.transactionsByApp(function(err, data) {
+  if (err) { console.log(err); }
+  console.log(data);
+});
+
+/**
+ * Example 5:
+ *
  * Process a refund for transaction '123456'
  * with pin set in cfg.pin and funding source ID '7654321'
  * for amount $10.00

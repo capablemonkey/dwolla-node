@@ -93,7 +93,8 @@ Transactions Methods:
 
     send(pin, destinationId, amount, params, fn)    ==> (string) transaction ID
     transactionById(id, fn)                         ==> (object) transaction details
-    transactions(params, fn)                        ==> (array) a list of recent transactions matching the search criteria
+    transactions(params, fn)                        ==> (array) a list of transactions matching the search criteria
+    transactionsByApp(params, fn)                   ==> (array) a list of transactions facilitated by the application, matching the search criteria
     transactionsStats(params, fn)                   ==> (object) statistics about the account associated with the token
     refund(pin, transactionId, fundsSource, amount, params, fn)         => (object) resulting Refund transaction resource
     
