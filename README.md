@@ -52,6 +52,7 @@ This repo includes various usage examples, including:
 * Listing or searching a user's contacts [contacts.js]
 * Creating a money request, and listing a user's pending money requests [requests.js]
 * Getting transactions, transaction statistics, and processing refunds [transactions.js]
+* Creating a MassPay job, retrieving jobs, and their items [masspay.js]
 
 ## Methods
 
@@ -103,6 +104,14 @@ Money Request Methods:
     requestById(request_id, fn)     ==> (object) a Request resource
     cancelRequest(request_id, fn)   ==> (bool) true if successfully cancelled, otherwise, error 
     fulfillRequest(pin, request_id, amount, params, fn)     ==> (object) the Request resource
+
+MassPay Methods:
+
+    createMassPayJob(fundsSource, pin, items, params, fn)       ==> (object) resulting MassPay Job
+    getMassPayJobs(fn)      ==> (array) list of MassPay Jobs
+    getMassPayJob(job_id, fn)       ==> (object) MassPay Job 
+    getMassPayJobItems(job_id, fn)      ==> (array) list of the job's Items
+    getMassPayJobItem(job_id, item_id, fn)      ==> (object) a particular job's Item
 
 Offsite Gateway Methods:
 
@@ -159,28 +168,3 @@ This wrapper is a forked extension of Kenan Shifflett's 'node-dwolla' module.  M
 ## TODO
 
 1. Use `nock` module to mock `http` instead of mocking `restler` with `mockery` because the former lets us validate restler's behavior, which we are today assuming will always work as expected.
-
-## License 
-
-(The MIT License)
-
-Copyright (c) 2014 Dwolla &lt;api@dwolla.com&gt;
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

@@ -52,4 +52,30 @@ describe('MassPay', function() {
 	    });
 	});
 
+	describe('get a masspay job item', function() {
+		it('Should make the correct request', function(done) {
+
+		  dwolla.setToken(init.fakeKeys.accessToken);
+	      dwolla.getMassPayJobItem('12345678', '987654321', function() {});
+
+	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/masspay/12345678/items/987654321');
+	      init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken});
+
+	      done();
+	    });
+	});
+
+	describe('get all masspay jobs created by a user', function() {
+		it('Should make the correct request', function(done) {
+
+		  dwolla.setToken(init.fakeKeys.accessToken);
+	      dwolla.getMassPayJobs(function() {});
+
+	      init.restlerMock.lastRequest.url.should.equal('https://www.dwolla.com/oauth/rest/masspay/');
+	      init.restlerMock.lastRequest.options.should.eql({oauth_token: init.fakeKeys.accessToken});
+
+	      done();
+	    });
+	});
+
 });
