@@ -1,6 +1,6 @@
-var Dwolla = require('dwolla')()    // Include the Dwolla REST Client
-    , cfg = require('./_config')    // Include any required keys
-    ;
+var cfg = require('./_config'); 
+var Dwolla = require('dwolla')(cfg.apiKey, cfg.apiSecret);
+        
 
 // Seed the user's OAuth token
 Dwolla.setToken(cfg.accessToken);
