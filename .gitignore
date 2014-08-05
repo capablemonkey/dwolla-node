@@ -3,4 +3,4 @@ env.sh
 node_modules
 demo
 examples/node_modules
-/.idea/
+.idea
