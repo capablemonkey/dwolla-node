@@ -1,39 +1,34 @@
-var Dwolla = require('dwolla')(cfg.apiKey, cfg.apiSecret)   // Include the Dwolla REST Client
-    , cfg = require('./_config')                            // Include any required keys
+var cfg = require('./_config')                            // Include any required keys
+    , Dwolla = require('dwolla')(cfg.apiKey, cfg.apiSecret)   // Include the Dwolla REST Client
     , $ = require('seq')
     , express = require('express')
     , app = express()
     ;
 
 // Some constants...
-var redirect_uri = 'http://localhost:3000/redirect'
+var redirect_uri = 'http://localhost:3000/redirect';
 
 
 /**
  * EXAMPLE 1: (simple example) 
  *   Create a new offsite gateway checkout
- *   session, with 1 test product, and
- *   a minimum of parameters
+ *   session, with no test products
  **/
-app.get('/example1', function(req, res) {
-    // Clears out any previous products
-    Dwolla.startGatewaySession(redirect_uri);
+app.get('/', function(req, res) {
+    var purchaseOrder = {
+     destinationId: '812-740-4294',
+     total: '5.00'
+    };
 
-    // Add first product; Price = $10, Qty = 1
-    Dwolla.addGatewayProduct('Test 1', 10)
-    
-    // Creates a checkout session, and return the URL
-    // Destination ID: 812-626-8794
-    $()
-        .seq(function() {
-            Dwolla.getGatewayURL('812-626-8794', this)
-        })
-        .seq(function(url) {
-            return res.send('To begin the checkout process, send the user off to <a href="' + url + '">' + url + '</a>');
-        })
-        .catch(function(error) {
-            return res.send('Oops: ' + error);
-        })
+    var params = {
+     allowFundingSources: true,
+     orderId: 'blah',
+    };
+
+    dwolla.createCheckout(redirect_uri, purchaseOrder, params, function(err, checkout) {
+     if (err) console.log(err);
+     res.send(util.format('go here: <a href="%s">%s</a>', checkout.checkoutURL));
+    });
 });
 
 
