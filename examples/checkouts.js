@@ -1,18 +1,20 @@
 var cfg = require('./_config')                            // Include any required keys
-    , Dwolla = require('dwolla')(cfg.apiKey, cfg.apiSecret)   // Include the Dwolla REST Client
+    , dwolla = require('dwolla')(cfg.apiKey, cfg.apiSecret)   // Include the Dwolla REST Client
     , $ = require('seq')
     , express = require('express')
     , app = express()
+    , util = require('util')
     ;
 
 // Some constants...
 var redirect_uri = 'http://localhost:3000/redirect';
 
+// Use Dwolla Sandbox API
+dwolla.sandbox = true;
 
 /**
  * EXAMPLE 1: (simple example) 
- *   Create a new offsite gateway checkout
- *   session, with no test products
+ *   Create a new standard offsite gateway checkout
  **/
 app.get('/', function(req, res) {
     var purchaseOrder = {
@@ -27,57 +29,54 @@ app.get('/', function(req, res) {
 
     dwolla.createCheckout(redirect_uri, purchaseOrder, params, function(err, checkout) {
      if (err) console.log(err);
-     res.send(util.format('go here: <a href="%s">%s</a>', checkout.checkoutURL));
+
+      // example checkout result:
+      // { checkoutURL: 'https://uat.dwolla.com/payment/checkout/d0429a55-c338-4139-b273-48d2f8c45693',
+      //   checkoutId: 'd0429a55-c338-4139-b273-48d2f8c45693' }
+
+     res.send(util.format('Checkout created.  Click to continue: <a href="%s">%s</a>', checkout.checkoutURL, checkout.checkoutURL));
     });
 });
 
 
 /**
  * EXAMPLE 2: (in-depth example) 
- *   Create a new offsite gateway checkout
+ *   Create a standard offsite gateway checkout
  *   session, with 2 test products, a
- *   discount, add shipping costs, tax,
  *   and order ID, and a memo/note
  **/
 app.get('/example2', function(req, res) {
-    // Set the server mode to test mode
-    Dwolla.setMode('TEST')
-    
-    // Clears out any previous products
-    Dwolla.startGatewaySession(redirect_uri);
-    
-    // Add first product; Price = $10, Qty = 1
-    Dwolla.addGatewayProduct('Test 1', 10, 'Test product')
-    
-    // Add first product; Price = $6, Qty = 2
-    Dwolla.addGatewayProduct('Test 2', 6, 'Another Test product', 2)
-    
-    // Creates a checkout session, and return the URL
-    // Destination ID: 812-626-8794
-    // Order ID: 10001
-    // Discount: $24.85
-    // Shipping: $0.99
-    // Tax: $1.87
-    // Memo: 'This is a great purchase'
-    // Callback: 'http://requestb.in/1fy628r1' (you'll need to create your own bin at http://requestb.in/)
+    var purchaseOrder = {
+      destinationId: '812-740-4294',
+      total: '5.00',      // this total must be equal to the sum of all the products' prices * their quantities
+      orderItems: [
+        {
+         "name": "Prime Rib Sandwich", 
+         "description": "A somewhat tasty non-vegetarian sandwich", 
+         "quantity": "1", 
+         "price": "2.0"
+        },
+        {
+         "name": "Ham Sandwich", 
+         "description": "Yum!", 
+         "quantity": "3", 
+         "price": "1.00"
+        }
+      ],
+      notes: 'Blah!!!'
+    };
+
     var params = {
-        order_id: '10001',
-        discount: '24.85',
-        shipping: '0.99',
-        tax: '1.87',
-        notes: 'This is a great purchase',
-        callback: 'http://requestb.in/1fy628r1'
-    }
-    $()
-        .seq(function() {
-            Dwolla.getGatewayURL('812-626-8794', params, this)
-        })
-        .seq(function(url) {
-            return res.send('To begin the checkout process, send the user off to <a href="' + url + '">' + url + '</a>');
-        })
-        .catch(function(error) {
-            return res.send('Oops: ' + error);
-        })
+      allowFundingSources: true,  // allow the user the option to pay with a bank account or line of credit
+      orderId: 'blah',            // a custom string to ID this checkout
+      checkoutWithApi: false,     // don't create a PayLater checkout
+      callback: 'http://requestb.in/17tq5l61' // you'll want to create your own Request Bin
+    };
+
+    dwolla.createCheckout('http://localhost:3000/redirect', purchaseOrder, params, function(err, checkout) {
+      if (err) console.log(err);
+      res.send(util.format('Checkout created.  Click to continue: <a href="%s">%s</a>', checkout.checkoutURL, checkout.checkoutURL));
+    });
 });
 
 
@@ -96,11 +95,8 @@ app.get('/redirect', function(req, res) {
     // Grab the reported total transaction amount
     amount = req.query['amount'];
 
-    // Clears out any previous products
-    Dwolla.startGatewaySession();
-
     // Verify the proposed signature
-    did_verify = Dwolla.verifyGatewaySignature(signature, checkout_id, amount)
+    did_verify = dwolla.verifyGatewaySignature(signature, checkout_id, amount)
 
     if (did_verify) {
         return res.send("<p>Dwolla's signature verified successfully. You should go ahead and process the order.</p>");
@@ -109,7 +105,44 @@ app.get('/redirect', function(req, res) {
     }
 });
 
+/**
+ * EXAMPLE 4: 
+ *   Get an existing Checkout by its checkoutId
+ **/
 
+// dwolla.getCheckout('a9d7c86a-0d0d-4466-b228-e15584a1315a', console.log);
+
+// Console output:
+
+// null { CheckoutId: 'd0429a55-c338-4139-b273-48d2f8c45693',
+//   Discount: null,
+//   Shipping: null,
+//   Tax: null,
+//   Total: 5,
+//   Status: 'Completed',
+//   FundingSource: 'Balance',
+//   TransactionId: 290142,
+//   ProfileId: null,
+//   DestinationTransactionId: 290141,
+//   OrderItems: [],
+//   Metadata: null }
+
+/**
+ * EXAMPLE 5: 
+ *   Complete a PayLater type checkout
+ **/
+
+// dwolla.completeCheckout('a9d7c86a-0d0d-4466-b228-e15584a1315a', console.log);
+
+// Console output:
+
+// null { Amount: 5,
+//   CheckoutId: 'a9d7c86a-0d0d-4466-b228-e15584a1315a',
+//   ClearingDate: '',
+//   OrderId: 'blah',
+//   TestMode: false,
+//   TransactionId: 290144,
+//   DestinationTransactionId: 290143 }
 
 // Start the server
 app.listen(3000);

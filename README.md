@@ -58,8 +58,8 @@ This repo includes various usage examples, including:
 
 Helper Methods:
 
-    setToken(oauth_token)   ==> (bool) did the token change sucessfully?
-    getToken()              ==> (string) the currently used oauth token
+    setToken(oauth_token)   ==> (bool) did the access token change sucessfully?
+    getToken()              ==> (string) the currently used oauth access token
 
 Authentication Methods:
 
@@ -115,11 +115,10 @@ MassPay Methods:
 
 Offsite Gateway Methods:
 
-    startGatewaySession(redirectUri)                            ==> (bool) did session start?
-    addGatewayProduct(name, amount[, description, quantity])    ==> (bool) was product added?
+    createCheckout(redirect, purchaseOrder, params, fn)     ==> (object) contains checkoutId and checkoutURL parameters
+    getCheckout(checkoutId, fn)     ==> (object) checkout object
+    completeCheckout(checkoutId, fn)        ==> (object) results of the checkout
     verifyGatewaySignature(signature, checkout_id, amount)      ==> (bool) is signature valid?
-    getGatewayURL(destination_id[, params], fn)                 ==> (string) checkout URL
-    setMode(mode)                                               ==> (bool) did the mode change successfully?
 
 ## Changelog
 
@@ -129,6 +128,7 @@ Offsite Gateway Methods:
 * Add support for new expiring OAuth access tokens and refresh tokens
 * Add support for adding funding sources, verifying them, withdraw, deposit
 * Add support for Money requests listing, cancel, fulfill, lookup
+* Refactor Off-Site Gateway implementation
 
 1.0.2
 * Add support for MassPay
