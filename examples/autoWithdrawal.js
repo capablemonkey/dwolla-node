@@ -5,6 +5,9 @@ var Dwolla = require('dwolla')(cfg.apiKey, cfg.apiSecret)   // Include the Dwoll
 // Seed the user's OAuth token
 Dwolla.setToken(cfg.accessToken);
 
+// use sandbox API environment
+Dwolla.sandbox = true;
+
 /***
  * Example 1:
  *

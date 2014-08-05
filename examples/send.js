@@ -5,6 +5,9 @@ var Dwolla = require('dwolla')()    // Include the Dwolla REST Client
 // Seed the user's OAuth token
 Dwolla.setToken(cfg.accessToken);
 
+// use sandbox API environment
+Dwolla.sandbox = true;
+
 /**
  * EXAMPLE 1: 
  *   Send money ($1.00) to a Dwolla ID 

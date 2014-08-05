@@ -1,10 +1,12 @@
 var Dwolla = require('dwolla')()    // Include the Dwolla REST Client
     , cfg = require('./_config')    // Include any required keys
-    , $ = require('seq')
     ;
 
 // Seed the user's OAuth token
 Dwolla.setToken(cfg.accessToken);
+
+// use sandbox API environment
+Dwolla.sandbox = true;
 
 /**
  * EXAMPLE 1: 
