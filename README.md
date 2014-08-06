@@ -1,11 +1,11 @@
-# dwolla-node: official Dwolla API node.js wrapper 
-===========
+# dwolla-node: Dwolla API wrapper
+---------
 
 ![travis-ci badge](https://travis-ci.org/Dwolla/dwolla-node.svg?branch=master)
 
-Bindings for the Dwolla API.  All API methods are asynchronous.
+Bindings for the Dwolla API.  All API methods are asynchronous.  
 
-Contributions are welcomed with open arms.
+Officially maintained by Dwolla.  Contributions are welcomed with open arms.
 
 ## Version
 1.1.1
