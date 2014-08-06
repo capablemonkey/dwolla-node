@@ -154,7 +154,7 @@ Offsite Gateway Methods:
 
 To run unit tests, do:
     
-`mocha ./test/unit`
+`npm test`
 
 Currently, unit tests only ensure HTTP requests created by the bindings are valid.  We plan to add support for testing sample API responses against the bindings.  Eventually, we'd also like to support live testing against the sandbox API.
 
