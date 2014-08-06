@@ -11,7 +11,7 @@
   "license": "MIT",
   "main": "./lib/dwolla.js",
   "engines": {
-    "node": ">=0.4.7 <0.9.0"
+    "node": ">=0.8 <0.12"
   },
   "dependencies": {
       "restler": "~3.2"
