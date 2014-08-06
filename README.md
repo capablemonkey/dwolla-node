@@ -1,5 +1,4 @@
 # dwolla-node: Dwolla API wrapper
----------
 
 ![travis-ci badge](https://travis-ci.org/Dwolla/dwolla-node.svg?branch=master)
 
