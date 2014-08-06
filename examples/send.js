@@ -1,5 +1,5 @@
 var cfg = require('./_config'); 
-var Dwolla = require('dwolla')(cfg.apiKey, cfg.apiSecret);
+var Dwolla = require('dwolla-node')(cfg.apiKey, cfg.apiSecret);
         
 
 // Seed the user's OAuth token

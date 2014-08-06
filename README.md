@@ -9,7 +9,7 @@ Contributions are welcomed with open arms.
 
 ## Installation
 
-    npm install dwolla
+    npm install dwolla-node
 
 ## Documentation
 
@@ -21,7 +21,7 @@ You'll need [Dwolla API Credentials](https://www.dwolla.com/applications) to int
 
 ```javascript
 // Instantiate a Dwolla API client
-var Dwolla = require('dwolla')(['{CLIENT_ID}', '{CLIENT_SECRET}']);
+var Dwolla = require('dwolla-node')(['{CLIENT_ID}', '{CLIENT_SECRET}']);
 
 // Set a user's OAuth token
 Dwolla.setToken('[TOKEN]');
@@ -148,7 +148,7 @@ Offsite Gateway Methods:
 ## Tests
 
 To run unit tests, do:
-
+    
 `mocha ./test/unit`
 
 Currently, unit tests only ensure HTTP requests created by the bindings are valid.  We plan to add support for testing sample API responses against the bindings.  Eventually, we'd also like to support live testing against the sandbox API.

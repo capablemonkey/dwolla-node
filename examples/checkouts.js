@@ -1,5 +1,5 @@
 var cfg = require('./_config')                            // Include any required keys
-    , dwolla = require('dwolla')(cfg.apiKey, cfg.apiSecret)   // Include the Dwolla REST Client
+    , dwolla = require('dwolla-node')(cfg.apiKey, cfg.apiSecret)   // Include the Dwolla REST Client
     , $ = require('seq')
     , express = require('express')
     , app = express()

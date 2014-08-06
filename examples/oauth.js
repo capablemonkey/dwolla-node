@@ -1,5 +1,5 @@
 var cfg = require('./_config'); // require any needed keys
-var Dwolla = require('dwolla')(cfg.apiKey, cfg.apiSecret); // initialize API client
+var Dwolla = require('dwolla-node')(cfg.apiKey, cfg.apiSecret); // initialize API client
 var $ = require('seq');
 var express = require('express');
 var app = express();

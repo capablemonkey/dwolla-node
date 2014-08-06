@@ -1,13 +1,15 @@
 {
   "author": "Dwolla <api@dwolla.com>",
-  "contributors": ["Gordon Zheng <gordon@dwolla.com>", "David Stancu <david@dwolla.com>", "Michael Schonfeld <michael@schonfeld.org>", "Kenan Shifflett <kenan.shifflett@gmail.com>"],
-  "name": "dwolla",
+  "contributors": ["Gordon Zheng <gordon@dwolla.com>", "David Stancu <david@dwolla.com>"],
+  "name": "dwolla-node",
   "description": "Official NodeJS Wrapper for Dwolla's API (based off of Kenan Shifflett's node-dwolla library).",
   "version": "1.1.0",
   "repository": {
     "type": "git",
     "url": "git@github.com:Dwolla/dwolla-node.git"
   },
+  "license": "MIT",
+  "main": "./lib/dwolla.js",
   "engines": {
     "node": ">=0.4.7 <0.9.0"
   },
