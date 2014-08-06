@@ -5,7 +5,7 @@ Bindings for the Dwolla API.  All API methods are asynchronous.
 Contributions are welcomed with open arms.
 
 ## Version
-1.1.0
+1.1.1
 
 ## Installation
 
@@ -122,6 +122,9 @@ Offsite Gateway Methods:
     verifyGatewaySignature(signature, checkout_id, amount)      ==> (bool) is signature valid?
 
 ## Changelog
+
+1.1.1
+* Change module name to 'dwolla-node'
 
 1.1.0
 * Add unit tests to validate HTTP requests
