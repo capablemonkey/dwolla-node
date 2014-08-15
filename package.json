@@ -14,7 +14,7 @@
     "node": ">=0.8 <0.12"
   },
   "dependencies": {
-      "restler": "~3.2"
+      "restler": "git+https://github.com/rashthedude/restler#691f46bde73ecdbbb2491b22e179d814490c4e93"
   },
   "devDependencies": {
     "should": ">=0.6.3",
